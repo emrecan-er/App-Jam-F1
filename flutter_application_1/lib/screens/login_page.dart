@@ -27,7 +27,7 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: Get.height / 4.5,
+                height: Get.height / 5,
               ),
               Image.asset(
                 'assets/akademi.png',
@@ -155,7 +155,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 100,
+                height: 110,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
