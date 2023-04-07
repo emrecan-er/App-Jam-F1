@@ -11,125 +11,162 @@ import 'package:nice_buttons/nice_buttons.dart';
 
 import '../constants/constans.dart';
 import '../widgets/custom_form_field.dart';
-import '../widgets/wave_clipper.dart';
 
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 8,
-              top: 8,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Oyun ve Uygulama Akademisi',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'VarelaRound',
-                    fontSize: 25,
-                    color: kGoogleBlue,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          CustomFormField(
-              hint: 'Username',
-              lines: 1,
-              type: TextInputType.emailAddress,
-              obscureText: false,
-              onChanged: (input) {},
-              icon: FontAwesomeIcons.user),
-          CustomFormField(
-            hint: 'Password',
-            lines: 1,
-            type: TextInputType.name,
-            obscureText: true,
-            onChanged: (input) {},
-            icon: Icons.password,
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          RichText(
-            text: TextSpan(
-                text: 'Don\'t have an account?',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: 'VarelaRound',
-                    fontSize: 13),
-                children: <TextSpan>[
-                  TextSpan(
-                      text: ' Sign up',
-                      style: TextStyle(
-                          color: Colors.red,
-                          fontFamily: 'VarelaRound',
-                          fontSize: 13),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Get.to(
-                            RegisterPage(),
-                          );
-                          // navigate to desired screen
-                        })
-                ]),
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          NiceButtons(
-            height: 40,
-            startColor: Colors.red,
-            endColor: Colors.red.withOpacity(0.9),
-            borderColor: Colors.red.withOpacity(0.5),
-            stretch: false,
-            progress: true,
-            gradientOrientation: GradientOrientation.Horizontal,
-            onTap: (finish) {
-              Get.off(MainScreen());
-            },
-            child: Text(
-              'Login',
-              style: TextStyle(color: Colors.white, fontSize: 18),
-            ),
-          ),
-          Row(
+    return Material(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                'assets/girisim.png',
-                height: 40,
+              SizedBox(
+                height: Get.height / 4,
               ),
-              Image.asset(
-                'assets/girvak-logo.png',
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Oyun ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'VarelaRound',
+                      fontSize: 23,
+                      color: kGoogleBlue,
+                    ),
+                  ),
+                  Text(
+                    've ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'VarelaRound',
+                      fontSize: 23,
+                      color: kGoogleYellow,
+                    ),
+                  ),
+                  Text(
+                    'Uygulama ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'VarelaRound',
+                      fontSize: 23,
+                      color: kGoogleRed,
+                    ),
+                  ),
+                  Text(
+                    'Akademisi',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'VarelaRound',
+                      fontSize: 23,
+                      color: kGoogleGreen,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              CustomFormField(
+                  hint: 'Username',
+                  lines: 1,
+                  type: TextInputType.emailAddress,
+                  obscureText: false,
+                  onChanged: (input) {},
+                  icon: FontAwesomeIcons.user),
+              CustomFormField(
+                hint: 'Password',
+                lines: 1,
+                type: TextInputType.name,
+                obscureText: true,
+                onChanged: (input) {},
+                icon: Icons.password,
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              RichText(
+                text: TextSpan(
+                    text: 'Hesabın yok mu?',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'VarelaRound',
+                        fontSize: 13),
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: ' Kayıt ol',
+                          style: TextStyle(
+                              color: kGoogleBlue,
+                              fontFamily: 'VarelaRound',
+                              fontSize: 13),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Get.to(
+                                RegisterPage(),
+                              );
+                              // navigate to desired screen
+                            })
+                    ]),
+              ),
+              SizedBox(
                 height: 30,
               ),
-              Image.asset(
-                'assets/google-logo.png',
+              NiceButtons(
                 height: 40,
+                startColor: kGoogleRed,
+                endColor: kGoogleRed.withOpacity(0.9),
+                borderColor: kGoogleRed.withOpacity(0.5),
+                stretch: false,
+                progress: true,
+                gradientOrientation: GradientOrientation.Horizontal,
+                onTap: (finish) {
+                  Timer(Duration(seconds: 5), () {
+                    Get.off(MainScreen());
+                  });
+                },
+                child: Text(
+                  'Giriş Yap',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontFamily: 'VarelaRound'),
+                ),
               ),
-              Image.asset(
-                'assets/logo-2.png',
-                height: 40,
+              SizedBox(
+                height: 100,
               ),
-              Image.asset(
-                'assets/girisim.png',
-                height: 40,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Image.asset(
+                    'assets/girisim.png',
+                    height: 21,
+                  ),
+                  Image.asset(
+                    'assets/girvak-logo.png',
+                    height: 21,
+                  ),
+                  Image.asset(
+                    'assets/google-logo.png',
+                    height: 21,
+                  ),
+                  Image.asset(
+                    'assets/logo-2.png',
+                    height: 21,
+                  ),
+                  Image.asset(
+                    'assets/logo-3.png',
+                    height: 21,
+                  ),
+                ],
               ),
+              SizedBox(
+                height: 20,
+              )
             ],
           ),
-          Spacer(),
-        ],
+        ),
       ),
     );
   }

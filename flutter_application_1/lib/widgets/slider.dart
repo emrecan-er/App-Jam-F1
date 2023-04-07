@@ -21,14 +21,14 @@ class SliderPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          height: Get.height / 10,
+          height: Get.height / 40,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: 300,
-              height: 250,
+              width: 400,
+              height: 300,
               child: Image.asset(image),
             )
           ],

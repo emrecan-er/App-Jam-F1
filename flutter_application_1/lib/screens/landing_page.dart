@@ -76,8 +76,8 @@ class _LandingState extends State<LandingPage> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: (index == _currentPage)
-                              ? kGoogleBlue
-                              : kGoogleBlue,
+                              ? kGoogleRed
+                              : kGoogleRed.withOpacity(0.5),
                         ),
                       );
                     },
@@ -92,23 +92,23 @@ class _LandingState extends State<LandingPage> {
                           child: SlideAction(
                             animationDuration: Duration(milliseconds: 700),
                             submittedIcon: Icon(
-                              FontAwesomeIcons.heartPulse,
+                              FontAwesomeIcons.google,
                               color: Colors.white,
                             ),
-                            text: 'Let\'s Start',
+                            text: 'Başlayalım',
                             textStyle: TextStyle(
                               color: Colors.white,
                               fontFamily: 'VarelaRound',
-                              fontSize: 20,
+                              fontSize: 18,
                             ),
                             elevation: 1,
-                            sliderButtonIcon: Icon(
+                            sliderButtonIcon: FaIcon(
                               Icons.arrow_forward,
-                              size: 20,
-                              color: kGoogleBlue,
+                              size: 22,
+                              color: kGoogleRed,
                             ),
                             sliderButtonIconPadding: 10,
-                            outerColor: kGoogleBlue,
+                            outerColor: kGoogleRed.withOpacity(0.8),
                             sliderButtonIconSize: 14,
                             height: 50,
                             key: _key,
@@ -121,7 +121,7 @@ class _LandingState extends State<LandingPage> {
                           icon: Icon(
                             Icons.navigate_next,
                             size: 30,
-                            color: kGoogleBlue,
+                            color: kGoogleRed,
                           ),
                           onPressed: () {
                             _controller.nextPage(

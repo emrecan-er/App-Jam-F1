@@ -33,15 +33,15 @@ class CustomFormField extends StatelessWidget {
           fontFamily: 'VarelaRound',
         ),
         decoration: InputDecoration(
-          labelStyle: TextStyle(color: kGoogleYellow),
-          floatingLabelStyle: TextStyle(color: kGoogleYellow),
-          focusColor: kGoogleYellow,
+          labelStyle: TextStyle(color: kGoogleGreen),
+          floatingLabelStyle: TextStyle(color: kGoogleGreen),
+          focusColor: kGoogleGreen,
           prefixIcon: Icon(
             icon,
             color: Colors.grey,
             size: 16,
           ),
-          fillColor: kGoogleYellow,
+          fillColor: kGoogleGreen,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
             borderSide: BorderSide(
@@ -50,7 +50,7 @@ class CustomFormField extends StatelessWidget {
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: kGoogleYellow, width: 2.0),
+            borderSide: BorderSide(color: kGoogleGreen, width: 2.0),
             borderRadius: BorderRadius.circular(25.0),
           ),
           hintText: hint,
