@@ -66,7 +66,7 @@ class CircularPercentManager extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircularPercentIndicator(
       radius: 50.0,
-      lineWidth: 11.0,
+      lineWidth: 15.0,
       animation: true,
       percent: yuzde / 100,
       center: Text(
