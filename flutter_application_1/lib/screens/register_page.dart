@@ -130,17 +130,15 @@ class RegisterPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Obx(
-                  () => Checkbox(
-                    side: BorderSide(
-                      width: 2,
-                      color: kGoogleBlue,
-                    ),
-                    value: true,
-                    onChanged: (value) {},
-                    activeColor: Colors.red,
+                Checkbox(
+                  side: BorderSide(
+                    width: 2,
+                    color: kGoogleBlue,
                   ),
-                )
+                  value: true,
+                  onChanged: (value) {},
+                  activeColor: Colors.red,
+                ),
               ],
             ),
             Center(
