@@ -1,13 +1,21 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/constans.dart';
+import 'package:flutter_application_1/screens/login_page.dart';
+import 'package:flutter_application_1/service/auth_service.dart';
 import 'package:flutter_application_1/widgets/circular_percents.dart';
 import 'package:flutter_application_1/widgets/coursera.dart';
 import 'package:flutter_application_1/widgets/tasks.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import '../widgets/my_header.dart';
 import 'package:appbar_animated/appbar_animated.dart';
+
+AuthService authService = AuthService();
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -29,18 +37,41 @@ class _MainScreenState extends State<MainScreen> {
       ),
       backgroundColor: Colors.white,
       body: ScaffoldLayoutBuilder(
-        appBarHeight: 70,
+        appBarHeight: 50,
         backgroundColorAppBar: ColorBuilder(Colors.transparent, Colors.blue),
         textColorAppBar: ColorBuilder(Colors.white),
         appBarBuilder: _appBar,
         child: SingleChildScrollView(
           child: Column(
             children: [
-              MyHeader(
-                  image: 'assets/koy.png',
-                  textTop: 'Hoşgeldin',
-                  textBottom: 'Kullanıcı',
-                  offset: 0),
+              SizedBox(
+                width: Get.width,
+                height: 250,
+                child: StreamBuilder(
+                  stream: authService.getUser(),
+                  builder: (context, snapshot) {
+                    return !snapshot.hasData
+                        ? CircularProgressIndicator()
+                        : SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: snapshot.data?.docs.length,
+                                itemBuilder: (context, index) {
+                                  DocumentSnapshot documentSnapshot =
+                                      snapshot.data!.docs[index];
+
+                                  return MyHeader(
+                                      image: 'assets/koy.png',
+                                      textTop: 'Hoşgeldin',
+                                      textBottom: documentSnapshot['name'],
+                                      offset: 0);
+                                }),
+                          );
+                  },
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -175,7 +206,8 @@ Widget _appBar(BuildContext context, ColorAnimated colorAnimated) {
       IconButton(
         onPressed: () {},
         icon: Icon(
-          Icons.notifications,
+          Icons.logout,
+          size: 20,
           color: colorAnimated.color,
         ),
       ),

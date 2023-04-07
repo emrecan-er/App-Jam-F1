@@ -1,11 +1,16 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/constans.dart';
+import 'package:flutter_application_1/controller/register_controller.dart';
+import 'package:flutter_application_1/screens/login_page.dart';
+import 'package:flutter_application_1/service/auth_service.dart';
 import 'package:flutter_application_1/widgets/custom_form_field.dart';
 import 'package:get/get.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
 class RegisterPage extends StatelessWidget {
+  RegisterController registerController = RegisterController();
+  AuthService authService = AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +28,7 @@ class RegisterPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    'Create an Account',
+                    'Hesap Oluştur',
                     style: TextStyle(
                       fontFamily: 'VarelaRound',
                       fontWeight: FontWeight.bold,
@@ -36,110 +41,121 @@ class RegisterPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Personal Info',
+                'Kişisel Bilgilerin',
                 style: TextStyle(
                   fontFamily: 'VarelaRound',
                   color: Colors.grey,
                 ),
               ),
             ),
+            SizedBox(
+              height: 10,
+            ),
             CustomFormField(
               lines: 1,
               type: TextInputType.name,
               icon: Icons.person,
-              hint: 'Name',
+              hint: 'Adın',
               obscureText: false,
-              onChanged: (input) {},
+              onChanged: (input) {
+                registerController.name = input;
+                print(registerController.name);
+              },
+            ),
+            SizedBox(
+              height: 10,
             ),
             CustomFormField(
               lines: 1,
               type: TextInputType.emailAddress,
               icon: Icons.person,
-              hint: 'Surname',
+              hint: 'Soyadın',
               obscureText: false,
-              onChanged: (input) {},
+              onChanged: (input) {
+                registerController.surname = input;
+              },
             ),
-            CustomFormField(
-              lines: 1,
-              type: TextInputType.number,
-              icon: Icons.numbers,
-              hint: 'Age',
-              obscureText: false,
-              onChanged: (input) {},
-            ),
-            CustomFormField(
-              lines: 3,
-              type: TextInputType.name,
-              icon: Icons.home,
-              hint: '\nAddress',
-              obscureText: false,
-              onChanged: (input) {},
+            SizedBox(
+              height: 10,
             ),
             CustomFormField(
               lines: 1,
               type: TextInputType.emailAddress,
               icon: Icons.mail,
-              hint: 'E-Mail Address',
+              hint: 'Akademiye kayıtlı olduğun mailin',
               obscureText: false,
-              onChanged: (input) {},
+              onChanged: (input) {
+                registerController.email = input;
+              },
+            ),
+            SizedBox(
+              height: 10,
             ),
             CustomFormField(
               lines: 1,
               type: TextInputType.emailAddress,
-              icon: Icons.mail,
-              hint: 'Password',
+              icon: Icons.password_sharp,
+              hint: 'Şifre',
               obscureText: true,
-              onChanged: (input) {},
+              onChanged: (input) {
+                registerController.password = input;
+              },
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RichText(
-                    text: TextSpan(
-                      text: 'I have read and accept the ',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'VarelaRound',
-                          fontSize: 13),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: 'Terms',
-                            style: TextStyle(
-                                color: Colors.red,
-                                fontFamily: 'VarelaRound',
-                                fontSize: 13),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                showDialog(
-                                    context: context,
-                                    builder: ((context) {
-                                      return AlertDialog(
-                                        title: Text('Legal Consent'),
-                                        content: Column(
-                                          children: [
-                                            Text(
-                                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras rhoncus, orci id lobortis auctor, ante magna semper odio, sed pulvinar nisi turpis eget sem. Morbi porttitor aliquam metus, ut feugiat ipsum aliquet vitae. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam pretium justo vitae lorem dictum, ut feugiat mi convallis. Mauris dui nisi, imperdiet vel odio id, porttitor mattis justo. Duis dapibus lorem enim. Donec placerat, enim nec pulvinar faucibus, dui ex suscipit dui, id consectetur eros orci id mauris. Nulla ac tincidunt magna, vel egestas tortor. Suspendisse dictum mauris id consequat feugiat. Aenean eu libero sit amet risus facilisis ultricies. Aenean dictum ex mauris, vitae congue magna sagittis sed. Integer sodales auctor molestie. Aliquam non eros nisi. Ut accumsan id ante id finibus.'),
-                                          ],
-                                        ),
-                                      );
-                                    }));
-                              }),
-                      ],
+            SizedBox(
+              height: Get.height / 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: RichText(
+                      text: TextSpan(
+                        text: 'I have read and accept the ',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'VarelaRound',
+                            fontSize: 13),
+                        children: <TextSpan>[
+                          TextSpan(
+                              text: 'Terms',
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontFamily: 'VarelaRound',
+                                  fontSize: 13),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  showDialog(
+                                      context: context,
+                                      builder: ((context) {
+                                        return AlertDialog(
+                                          title: Text('Legal Consent'),
+                                          content: Column(
+                                            children: [
+                                              Text(
+                                                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras rhoncus, orci id lobortis auctor, ante magna semper odio, sed pulvinar nisi turpis eget sem. Morbi porttitor aliquam metus, ut feugiat ipsum aliquet vitae. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam pretium justo vitae lorem dictum, ut feugiat mi convallis. Mauris dui nisi, imperdiet vel odio id, porttitor mattis justo. Duis dapibus lorem enim. Donec placerat, enim nec pulvinar faucibus, dui ex suscipit dui, id consectetur eros orci id mauris. Nulla ac tincidunt magna, vel egestas tortor. Suspendisse dictum mauris id consequat feugiat. Aenean eu libero sit amet risus facilisis ultricies. Aenean dictum ex mauris, vitae congue magna sagittis sed. Integer sodales auctor molestie. Aliquam non eros nisi. Ut accumsan id ante id finibus.'),
+                                            ],
+                                          ),
+                                        );
+                                      }));
+                                }),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Checkbox(
-                  side: BorderSide(
-                    width: 2,
-                    color: kGoogleBlue,
+                  Checkbox(
+                    side: BorderSide(
+                      width: 2,
+                      color: kGoogleBlue,
+                    ),
+                    value: true,
+                    onChanged: (value) {},
+                    activeColor: Colors.red,
                   ),
-                  value: true,
-                  onChanged: (value) {},
-                  activeColor: Colors.red,
-                ),
-              ],
+                ],
+              ),
             ),
             Center(
               child: NiceButtons(
@@ -151,11 +167,20 @@ class RegisterPage extends StatelessWidget {
                 borderRadius: 30,
                 gradientOrientation: GradientOrientation.Horizontal,
                 onTap: (finish) {
-                  print('On tap called');
+                  authService.createPerson(
+                      registerController.email,
+                      registerController.password,
+                      registerController.name,
+                      registerController.surname);
+                  Get.off(LoginPage());
                 },
                 child: Text(
-                  'Register',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
+                  'Kayıt Ol',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 17,
+                    fontFamily: 'VarelaRound',
+                  ),
                 ),
               ),
             ),

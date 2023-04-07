@@ -4,15 +4,20 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/main_screen.dart';
 import 'package:flutter_application_1/screens/register_page.dart';
+import 'package:flutter_application_1/service/auth_service.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
 import '../constants/constans.dart';
+import '../controller/register_controller.dart';
 import '../widgets/custom_form_field.dart';
 
 class LoginPage extends StatelessWidget {
+  AuthService authService = AuthService();
+  RegisterController registerController = RegisterController();
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -22,7 +27,15 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: Get.height / 4,
+                height: Get.height / 4.5,
+              ),
+              Image.asset(
+                'assets/akademi.png',
+                width: 50,
+                height: 50,
+              ),
+              SizedBox(
+                height: 10,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -69,18 +82,22 @@ class LoginPage extends StatelessWidget {
                 height: 50,
               ),
               CustomFormField(
-                  hint: 'Username',
+                  hint: 'Email',
                   lines: 1,
                   type: TextInputType.emailAddress,
                   obscureText: false,
-                  onChanged: (input) {},
+                  onChanged: (input) {
+                    registerController.logInEmail = input;
+                  },
                   icon: FontAwesomeIcons.user),
               CustomFormField(
-                hint: 'Password',
+                hint: 'Şifre',
                 lines: 1,
                 type: TextInputType.name,
                 obscureText: true,
-                onChanged: (input) {},
+                onChanged: (input) {
+                  registerController.logInPassword = input;
+                },
                 icon: Icons.password,
               ),
               SizedBox(
@@ -121,8 +138,12 @@ class LoginPage extends StatelessWidget {
                 progress: true,
                 gradientOrientation: GradientOrientation.Horizontal,
                 onTap: (finish) {
-                  Timer(Duration(seconds: 5), () {
-                    Get.off(MainScreen());
+                  Timer(Duration(seconds: 2), () {
+                    authService.signIn(
+                      registerController.logInEmail,
+                      registerController.logInPassword,
+                    );
+                    Get.offAll(MainScreen());
                   });
                 },
                 child: Text(
@@ -136,30 +157,33 @@ class LoginPage extends StatelessWidget {
               SizedBox(
                 height: 100,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Image.asset(
-                    'assets/girisim.png',
-                    height: 21,
-                  ),
-                  Image.asset(
-                    'assets/girvak-logo.png',
-                    height: 21,
-                  ),
-                  Image.asset(
-                    'assets/google-logo.png',
-                    height: 21,
-                  ),
-                  Image.asset(
-                    'assets/logo-2.png',
-                    height: 21,
-                  ),
-                  Image.asset(
-                    'assets/logo-3.png',
-                    height: 21,
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Image.asset(
+                      'assets/girisim.png',
+                      height: 18,
+                    ),
+                    Image.asset(
+                      'assets/girvak-logo.png',
+                      height: 18,
+                    ),
+                    Image.asset(
+                      'assets/google-logo.png',
+                      height: 18,
+                    ),
+                    Image.asset(
+                      'assets/logo-2.png',
+                      height: 18,
+                    ),
+                    Image.asset(
+                      'assets/logo-3.png',
+                      height: 18,
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 20,

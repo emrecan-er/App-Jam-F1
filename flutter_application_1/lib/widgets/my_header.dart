@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MyHeader extends StatefulWidget {
   final String image;
@@ -23,7 +24,7 @@ class _MyHeaderState extends State<MyHeader> {
       child: Container(
         padding: EdgeInsets.only(left: 40, top: 50, right: 20),
         height: 250,
-        width: double.infinity,
+        width: Get.width,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,

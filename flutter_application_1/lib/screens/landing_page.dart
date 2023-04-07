@@ -90,7 +90,7 @@ class _LandingState extends State<LandingPage> {
                           padding: const EdgeInsets.only(
                               top: 64, right: 32, left: 32),
                           child: SlideAction(
-                            animationDuration: Duration(milliseconds: 700),
+                            animationDuration: Duration(milliseconds: 900),
                             submittedIcon: Icon(
                               FontAwesomeIcons.google,
                               color: Colors.white,

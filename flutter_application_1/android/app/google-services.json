@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "746484562430",
+    "project_id": "app-jam-f1",
+    "storage_bucket": "app-jam-f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:746484562430:android:1cd175a841cdc88b92e8af",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "746484562430-0r736ms506tss4c9s0cq701fak0qiu5k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNz35-0MggaIuI4cXVXBAw8AFlUwJoGtg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "746484562430-0r736ms506tss4c9s0cq701fak0qiu5k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

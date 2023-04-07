@@ -44,6 +44,8 @@ dependencies:
   font_awesome_flutter: ^10.4.0
   slider: ^0.0.1
   slide_to_act: ^2.0.1
+  cloud_firestore: ^4.5.0
+  firebase_auth: ^4.4.0
 
 dev_dependencies:
   flutter_test:
