@@ -338,9 +338,7 @@ class _MainScreenState extends State<MainScreen> {
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Get.to(
-                                  ToDoPage()
-                                );
+                                Get.to(ToDoPage());
                               }),
                       ]),
                     ),
