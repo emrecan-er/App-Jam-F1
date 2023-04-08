@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter_application_1/screens/coursera_page.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -27,30 +28,29 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  Future<http.Response> sendMessageToSlack(
-      String message, String channel, String botToken) async {
+  Future<void> sendMessageToSlackBot(
+      String message, String botToken, String channel) async {
     final response = await http.post(
       Uri.parse('https://slack.com/api/chat.postMessage'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
         'Authorization': 'Bearer $botToken',
       },
-      body: jsonEncode(<String, dynamic>{
-        'channel': channel,
-        'text': message,
-      }),
+      body: '{ "text": "$message", "channel": "$channel" }',
     );
-
-    return response;
+    if (response.statusCode == 200) {
+      print('Message sent successfully');
+    } else {
+      print('Failed to send message: ${response.statusCode}');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          sendMessageToSlack('deneme', '#general',
-              'xapp-1-A052P6R2KG9-5077341632805-c26400d7dd75a15917c1b81ea5067d8937497a02848d8bb8a48da2d3c6d9de3e');
+        onPressed: () async {
+          await sendMessageToSlackBot('asd', 'SLACK_TOKEN', '#general');
         },
         child: Icon(
           Icons.notes,
@@ -128,22 +128,92 @@ class _MainScreenState extends State<MainScreen> {
                     RichText(
                       text: TextSpan(children: [
                         TextSpan(
-                            text: 'Tamamını Gör',
-                            style: TextStyle(
-                              color: kGoogleRed,
-                              fontFamily: 'VarelaRound',
-                              fontSize: 12,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                print('Login Text Clicked');
-                              }),
+                          text: 'Tamamını Gör',
+                          style: TextStyle(
+                            color: kGoogleRed,
+                            fontFamily: 'VarelaRound',
+                            fontSize: 12,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Get.to(
+                                CourseraPage(),
+                              );
+                            },
+                        ),
                       ]),
                     ),
                   ],
                 ),
               ),
               Coursera(),
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                  width: Get.width,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: kGoogleBlue,
+                    gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [
+                        kGoogleBlue.withOpacity(0.2),
+                        kGoogleRed.withOpacity(0.2),
+                        kGoogleYellow.withOpacity(0.2),
+                        kGoogleGreen.withOpacity(0.2),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text(
+                            'Coursera ödevlerinde zorlanıyor musun?',
+                            style: TextStyle(
+                              fontFamily: 'VarelaRound',
+                              color: Colors.black,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text(
+                            'Geliştirdiğimiz bot sayesinde ödevlerin otomatikmen Slackte paylaşılacak.',
+                            style: TextStyle(
+                              fontFamily: 'VarelaRound',
+                              color: Colors.black54,
+                              fontSize: 13,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
+                            width: 30,
+                            height: 30,
+                            child: Image.asset('assets/slack.png'),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               SizedBox(
                 height: 20,
               ),
