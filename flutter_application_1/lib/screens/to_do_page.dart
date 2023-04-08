@@ -2,9 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/main_screen.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
+import '../modals/task_model.dart';
 
-class ToDoPage extends StatelessWidget {
+
+class ToDoPage extends StatefulWidget {
   const ToDoPage({super.key});
+
+  @override
+  State<ToDoPage> createState() => _ToDoPageState();
+}
+
+class _ToDoPageState extends State<ToDoPage> {
+  late List<Task> _allTask;
+
+  @override
+  void initState() {
+    super.initState();
+    _allTask = <Task>[];
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +54,19 @@ class ToDoPage extends StatelessWidget {
         )
       ],
      ),
+     body: ListView.builder(
+      itemBuilder: (context, index) {
+        var _listElementNow = _allTask[index];
+        return ListTile(
+          title: Text(_listElementNow.name + " " + _listElementNow.id),
+          subtitle: Text(_listElementNow.createdAt.toString()),
+        );
+      },
+      itemCount: _allTask.length,
+    ),
     );
   }
-  
+
   void _showAddTaskBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -59,7 +85,12 @@ class ToDoPage extends StatelessWidget {
                 Navigator.of(context).pop();
                 if(value.length>3){
                   DatePicker.showTimePicker(context, showSecondsColumn: false, onConfirm: (time){
-                    
+                    var newAddTask = Task.create(name: value, createdAt: time);
+
+                    _allTask.add(newAddTask);
+                    setState(() {
+                      
+                    });
                   });
                 }
               },
