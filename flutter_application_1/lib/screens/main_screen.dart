@@ -50,7 +50,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
+        onPressed: () {
           Get.to(ToDoPage());
         },
         /*() async {
@@ -399,12 +399,11 @@ Widget _appBar(BuildContext context, ColorAnimated colorAnimated) {
       ),
     ),
     actions: [
-      IconButton(
-        onPressed: () {},
-        icon: Icon(
-          Icons.logout,
-          size: 20,
-          color: colorAnimated.color,
+      SizedBox(
+        width: 70,
+        height: 70,
+        child: Image.asset(
+          'assets/icons.png',
         ),
       ),
     ],

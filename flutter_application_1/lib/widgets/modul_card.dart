@@ -111,6 +111,14 @@ class ModulCard extends StatelessWidget {
                   width: 30,
                   height: 25,
                   child: TextField(
+                    onChanged: (value) {
+                      //value kullanıcının girdiği değer oluyor.o değerleri ayrı ayrı tutup
+                      //yüzde hesabına vurulacak
+
+                      //burada ModulCardd çağırıldığında onChanged Fonksiyonunu iste
+
+                      // Yukarıda Function() onChanged; yazım constructorda required this.onChanged yapılacak
+                    },
                     keyboardType: TextInputType.number,
                     style: TextStyle(
                       fontFamily: 'VarelaRound',
