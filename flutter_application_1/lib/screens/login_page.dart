@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/dashboard.dart';
 import 'package:flutter_application_1/screens/main_screen.dart';
 import 'package:flutter_application_1/screens/register_page.dart';
 import 'package:flutter_application_1/service/auth_service.dart';
@@ -139,11 +140,18 @@ class LoginPage extends StatelessWidget {
                 gradientOrientation: GradientOrientation.Horizontal,
                 onTap: (finish) {
                   Timer(Duration(seconds: 2), () {
-                    authService.signIn(
+                    authService
+                        .signIn(
                       registerController.logInEmail,
                       registerController.logInPassword,
-                    );
-                    Get.offAll(MainScreen());
+                    )
+                        .then((value) {
+                      if (value?.uid == '9NxNtwGTmwd70yFSqlwJCWr5uFs2')
+                        Get.off(Dashboard());
+                      else {
+                        Get.off(MainScreen());
+                      }
+                    });
                   });
                 },
                 child: Text(

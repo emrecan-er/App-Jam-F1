@@ -30,6 +30,7 @@ class CustomFormField extends StatelessWidget {
         style: TextStyle(
           fontWeight: FontWeight.normal,
           color: Colors.black,
+          fontSize: 14,
           fontFamily: 'VarelaRound',
         ),
         decoration: InputDecoration(

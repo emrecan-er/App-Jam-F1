@@ -15,15 +15,15 @@ class MyWaveClipper extends StatelessWidget {
             child: ClipPath(
               clipper: WaveClipper(),
               child: Container(
-                color: kGoogleBlue,
-                height: 150,
+                color: kGoogleGreen,
+                height: 160,
               ),
             ),
           ),
           ClipPath(
             clipper: WaveClipper(),
             child: Container(
-              color: kGoogleBlue,
+              color: kGoogleGreen,
               height: 140,
               width: Get.width,
               child: Stack(
