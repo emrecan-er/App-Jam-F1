@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:developer';
+import 'package:http/http.dart' as http;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
@@ -25,11 +27,31 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  Future<http.Response> sendMessageToSlack(
+      String message, String channel, String botToken) async {
+    final response = await http.post(
+      Uri.parse('https://slack.com/api/chat.postMessage'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $botToken',
+      },
+      body: jsonEncode(<String, dynamic>{
+        'channel': channel,
+        'text': message,
+      }),
+    );
+
+    return response;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          sendMessageToSlack('deneme', '#general',
+              'xapp-1-A052P6R2KG9-5077341632805-c26400d7dd75a15917c1b81ea5067d8937497a02848d8bb8a48da2d3c6d9de3e');
+        },
         child: Icon(
           Icons.notes,
         ),
@@ -37,7 +59,7 @@ class _MainScreenState extends State<MainScreen> {
       ),
       backgroundColor: Colors.white,
       body: ScaffoldLayoutBuilder(
-        appBarHeight: 50,
+        appBarHeight: 60,
         backgroundColorAppBar: ColorBuilder(Colors.transparent, Colors.blue),
         textColorAppBar: ColorBuilder(Colors.white),
         appBarBuilder: _appBar,
@@ -75,7 +97,7 @@ class _MainScreenState extends State<MainScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
-                  children: [TextManager(message: "Yapılacaklar")],
+                  children: [TextManager(message: "Eğitimler")],
                 ),
               ),
               Tasks(),
@@ -122,6 +144,105 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               ),
               Coursera(),
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextManager(message: "Aylık Görevler"),
+                    RichText(
+                      text: TextSpan(children: [
+                        TextSpan(
+                            text: 'Tamamını Gör',
+                            style: TextStyle(
+                              color: kGoogleRed,
+                              fontFamily: 'VarelaRound',
+                              fontSize: 12,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                print('Login Text Clicked');
+                              }),
+                      ]),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.dotCircle,
+                      color: kGoogleYellow,
+                      size: 15,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      'Flutter eğitimlerinin 7 modülünü tamamla veya Unity\n uzmanlık eğitimlerinin %70\'ini tamamla.',
+                      overflow: TextOverflow.fade,
+                      softWrap: false,
+                      style: TextStyle(
+                        fontFamily: 'VarelaRound',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.dotCircle,
+                      color: kGoogleYellow,
+                      size: 15,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      'Coursera 4. kursu tamamla.',
+                      overflow: TextOverflow.fade,
+                      softWrap: false,
+                      style: TextStyle(
+                        fontFamily: 'VarelaRound',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.dotCircle,
+                      color: kGoogleYellow,
+                      size: 15,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      'App Jam yarışmasını kazan.',
+                      overflow: TextOverflow.fade,
+                      softWrap: false,
+                      style: TextStyle(
+                        fontFamily: 'VarelaRound',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               SizedBox(
                 height: 20,
               ),
