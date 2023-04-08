@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter_application_1/screens/coursera_page.dart';
+import 'package:flutter_application_1/screens/to_do_page.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -51,6 +52,7 @@ class _MainScreenState extends State<MainScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await sendMessageToSlackBot('asd', 'SLACK_TOKEN', '#general');
+          Get.to(ToDoPage());
         },
         child: Icon(
           Icons.notes,
@@ -333,7 +335,9 @@ class _MainScreenState extends State<MainScreen> {
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                print('Login Text Clicked');
+                                Get.to(
+                                  ToDoPage()
+                                );
                               }),
                       ]),
                     ),
