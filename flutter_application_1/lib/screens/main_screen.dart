@@ -50,10 +50,13 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await sendMessageToSlackBot('asd', 'SLACK_TOKEN', '#general');
+        onPressed: (){
           Get.to(ToDoPage());
         },
+        /*() async {
+          await sendMessageToSlackBot('asd', 'SLACK_TOKEN', '#general');
+          
+        },*/
         child: Icon(
           Icons.notes,
         ),
