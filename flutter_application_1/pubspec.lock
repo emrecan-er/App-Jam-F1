@@ -158,6 +158,27 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_date_pickers:
+    dependency: "direct dev"
+    description:
+      name: flutter_date_pickers
+      sha256: "2dfcb07c42a04771885fb35352353fc46eed87b8ad6b96bc369567d0cdb6c6f1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.1"
+  flutter_datetime_picker:
+    dependency: "direct dev"
+    description:
+      name: flutter_datetime_picker
+      sha256: "8e695c63c769350e541951227c2775190ec73ceda774a315b1dc9a99d5facfe5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.1"
+  flutter_localizations:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
