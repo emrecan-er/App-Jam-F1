@@ -19,6 +19,7 @@ class _ToDoPageState extends State<ToDoPage> {
   void initState() {
     super.initState();
     _allTask = <Task>[];
+    _allTask.add(Task.create(name: "Deneme Task", createdAt: DateTime.now()));
   }
 
 
@@ -54,16 +55,30 @@ class _ToDoPageState extends State<ToDoPage> {
         )
       ],
      ),
-     body: ListView.builder(
+     body: _allTask.isNotEmpty ? ListView.builder(
       itemBuilder: (context, index) {
         var _listElementNow = _allTask[index];
-        return ListTile(
-          title: Text(_listElementNow.name + " " + _listElementNow.id),
-          subtitle: Text(_listElementNow.createdAt.toString()),
+        return Dismissible(
+          background: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.delete, color: Colors.grey),
+              SizedBox(width: 8),
+              TextManager(message: "Bu görev silindi")
+            ],
+          ),
+          key: Key(_listElementNow.id),
+          onDismissed: (direction) {
+            _allTask.removeAt(index);
+          },
+          child: ListTile(
+            title: Text(_listElementNow.name + " " + _listElementNow.id),
+            subtitle: Text(_listElementNow.createdAt.toString()),
+          ),
         );
       },
       itemCount: _allTask.length,
-    ),
+    ) : Center(child: TextManager(message: "Görev ekle!!!"),)
     );
   }
 
