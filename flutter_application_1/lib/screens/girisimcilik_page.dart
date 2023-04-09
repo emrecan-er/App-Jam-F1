@@ -5,6 +5,7 @@ import 'package:flutter_application_1/widgets/modul_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../constants/constans.dart';
+import '../widgets/text_manager.dart';
 import '../widgets/wave_clipper.dart';
 
 class GirisimcilikPage extends StatefulWidget {

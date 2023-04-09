@@ -10,6 +10,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 import 'package:http/http.dart' as http;
 
+import '../widgets/text_manager.dart';
+
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
 

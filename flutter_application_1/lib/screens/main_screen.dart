@@ -1,23 +1,21 @@
-import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter_application_1/controller/task_controller.dart';
 import 'package:flutter_application_1/screens/coursera_page.dart';
 import 'package:flutter_application_1/screens/to_do_page.dart';
 import 'package:flutter_application_1/widgets/task_list_item.dart';
+import 'package:flutter_application_1/widgets/text_manager.dart';
 import 'package:http/http.dart' as http;
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/constans.dart';
-import 'package:flutter_application_1/screens/login_page.dart';
 import 'package:flutter_application_1/service/auth_service.dart';
 import 'package:flutter_application_1/widgets/circular_percents.dart';
 import 'package:flutter_application_1/widgets/coursera.dart';
 import 'package:flutter_application_1/widgets/tasks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
+import '../widgets/aylik_gorevler.dart';
 import '../widgets/my_header.dart';
 import 'package:appbar_animated/appbar_animated.dart';
 
@@ -51,8 +49,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    inspect(taskController.allTasks.value);
-    log(TaskController().flutterYuzde.toString());
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -200,7 +196,7 @@ class _MainScreenState extends State<MainScreen> {
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
-                            'Geliştirdiğimiz bot sayesinde ödevlerin otomatikmen Slackte paylaşılacak.Böylece ödevlerini daha çok görünecek',
+                            'Geliştirdiğimiz bot sayesinde ödevlerin otomatikmen Slackte paylaşılacak.Böylece ödevlerini daha çok kişi görünecek',
                             style: TextStyle(
                               fontFamily: 'VarelaRound',
                               color: Colors.black54,
@@ -227,102 +223,7 @@ class _MainScreenState extends State<MainScreen> {
               SizedBox(
                 height: 20,
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextManager(message: "Aylık Görevler"),
-                    RichText(
-                      text: TextSpan(children: [
-                        TextSpan(
-                            text: 'Tamamını Gör',
-                            style: TextStyle(
-                              color: kGoogleRed,
-                              fontFamily: 'VarelaRound',
-                              fontSize: 12,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                print('Login Text Clicked');
-                              }),
-                      ]),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    FaIcon(
-                      FontAwesomeIcons.dotCircle,
-                      color: kGoogleYellow,
-                      size: 15,
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      'Flutter eğitimlerinin 7 modülünü tamamla veya Unity\n uzmanlık eğitimlerinin %70\'ini tamamla.',
-                      overflow: TextOverflow.fade,
-                      softWrap: false,
-                      style: TextStyle(
-                        fontFamily: 'VarelaRound',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    FaIcon(
-                      FontAwesomeIcons.dotCircle,
-                      color: kGoogleYellow,
-                      size: 15,
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      'Coursera 4. kursu tamamla.',
-                      overflow: TextOverflow.fade,
-                      softWrap: false,
-                      style: TextStyle(
-                        fontFamily: 'VarelaRound',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    FaIcon(
-                      FontAwesomeIcons.dotCircle,
-                      color: kGoogleYellow,
-                      size: 15,
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      'App Jam yarışmasını kazan.',
-                      overflow: TextOverflow.fade,
-                      softWrap: false,
-                      style: TextStyle(
-                        fontFamily: 'VarelaRound',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              AylikGorevler(),
               SizedBox(
                 height: 20,
               ),
@@ -354,28 +255,37 @@ class _MainScreenState extends State<MainScreen> {
               ),
               SizedBox(
                 width: Get.width,
-                height: 100,
+                height: 75,
                 child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: taskController.allTasks.length,
+                    itemCount: taskController.allTasks.isEmpty
+                        ? 1
+                        : taskController.allTasks.length,
                     itemBuilder: (context, index) {
                       return taskController.allTasks.isEmpty
-                          ? TextManager(
-                              message:
-                                  'Henüz Yapılacak Listesine Ekleme Yapmadınız.')
-                          : Row(
-                              children: [
-                                SizedBox(
-                                    width: Get.width,
-                                    child: TaskItem(
-                                      task: taskController.allTasks[1],
-                                    )),
-                              ],
+                          ? Center(
+                              child: SizedBox(
+                                  width: Get.width,
+                                  height: 15,
+                                  child: Text(
+                                    'Buralar Henüz Boş...',
+                                    style: TextStyle(
+                                      fontFamily: 'VarelaRound',
+                                      fontStyle: FontStyle.italic,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  )),
+                            )
+                          : SizedBox(
+                              width: Get.width,
+                              child: TaskItem(
+                                task: taskController.allTasks[index],
+                              ),
                             );
                     }),
               ),
               SizedBox(
-                height: 50,
+                height: 20,
               ),
             ],
           ),
@@ -407,19 +317,4 @@ Widget _appBar(BuildContext context, ColorAnimated colorAnimated) {
       ),
     ],
   );
-}
-
-class TextManager extends StatelessWidget {
-  String message;
-  TextManager({required this.message});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(message,
-        style: TextStyle(
-          fontFamily: 'VarelaRound',
-          fontSize: 15,
-          fontWeight: FontWeight.bold,
-        ));
-  }
 }

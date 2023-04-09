@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/task_controller.dart';
 import 'package:flutter_application_1/data/local_storage.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/screens/main_screen.dart';
 import 'package:flutter_application_1/widgets/task_list_item.dart';
+import 'package:flutter_application_1/widgets/text_manager.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
 
@@ -24,6 +27,7 @@ class _ToDoPageState extends State<ToDoPage> {
   @override
   void initState() {
     super.initState();
+    taskController.allTasks.clear();
     _localStorage = locator<LocalStorage>();
     _allTask = <Task>[];
     _getAllTaskFromDb();
@@ -117,7 +121,9 @@ class _ToDoPageState extends State<ToDoPage> {
 
   void _getAllTaskFromDb() async {
     _allTask = await _localStorage.getAllTask();
-    taskController.allTasks.add(_localStorage.getAllTask());
+    taskController.allTasks.value = _allTask;
+    inspect(taskController.allTasks.value);
+
     setState(() {});
   }
 }
