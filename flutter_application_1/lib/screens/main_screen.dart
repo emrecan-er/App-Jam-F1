@@ -195,7 +195,7 @@ class _MainScreenState extends State<MainScreen> {
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
-                            'Geliştirdiğimiz bot sayesinde ödevlerin otomatikmen Slackte paylaşılacak.',
+                            'Geliştirdiğimiz bot sayesinde ödevlerin otomatikmen Slackte paylaşılacak.Böylece ödevlerini daha çok görünecek',
                             style: TextStyle(
                               fontFamily: 'VarelaRound',
                               color: Colors.black54,

@@ -9,13 +9,14 @@ class CustomFormField extends StatelessWidget {
   int lines;
   IconData icon;
   void Function(String) onChanged;
-  CustomFormField(
-      {required this.hint,
-      required this.lines,
-      required this.type,
-      required this.obscureText,
-      required this.onChanged,
-      required this.icon});
+  CustomFormField({
+    required this.hint,
+    required this.lines,
+    required this.type,
+    required this.obscureText,
+    required this.onChanged,
+    required this.icon,
+  });
   @override
   Widget build(BuildContext context) {
     return Padding(

@@ -9,13 +9,13 @@ class ModulCard extends StatelessWidget {
   int modulSayisi;
   String sure;
 
-  ModulCard(
-      {required this.backgroundColor,
-      required this.modulAciklamasi,
-      required this.sure,
-      required this.modulSayisi,
-      required this.modulAdi,
-      });
+  ModulCard({
+    required this.backgroundColor,
+    required this.modulAciklamasi,
+    required this.sure,
+    required this.modulSayisi,
+    required this.modulAdi,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,8 @@ class ModulCard extends StatelessWidget {
         width: Get.width,
         height: 275,
         decoration: BoxDecoration(
-          color: backgroundColor.withOpacity(0.4),
+          border: Border.all(color: backgroundColor),
+          color: backgroundColor.withOpacity(0.1),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
@@ -114,8 +115,6 @@ class ModulCard extends StatelessWidget {
                   height: 25,
                   child: TextField(
                     onChanged: (value) {
-
-                      
                       //value kullanıcının girdiği değer oluyor.o değerleri ayrı ayrı tutup
                       //yüzde hesabına vurulacak
 
