@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/task_controller.dart';
 import 'package:flutter_application_1/screens/main_screen.dart';
 import 'package:flutter_application_1/widgets/modul_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,6 +15,7 @@ class GirisimcilikPage extends StatefulWidget {
 }
 
 class _GirisimcilikPageState extends State<GirisimcilikPage> {
+  TaskController taskController = Get.put(TaskController());
   Color color = Colors.grey;
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,16 @@ class _GirisimcilikPageState extends State<GirisimcilikPage> {
               ),
             ),
             ModulCard(
+              onChanged: (String input) {
+                taskController.girisimcilikTamamlananModul.value +=
+                    int.parse(input);
+                print(taskController.girisimcilikTamamlananModul);
+                taskController.girisimcilikYuzde.value =
+                    (taskController.girisimcilikTamamlananModul.value /
+                            taskController.girisimcilikToplamModul.value) *
+                        100;
+                print(taskController.girisimcilikYuzde);
+              },
               modulSayisi: 9,
               modulAciklamasi:
                   'Yeni nesil girişim dünyasında var olmak için çıkacağın bu yolculukta ihtiyacın olacak tüm unsurları öğreneceksin.',
@@ -55,6 +67,16 @@ class _GirisimcilikPageState extends State<GirisimcilikPage> {
               sure: '338',
             ),
             ModulCard(
+              onChanged: (String input) {
+                taskController.girisimcilikTamamlananModul.value +=
+                    int.parse(input);
+                print(taskController.girisimcilikTamamlananModul);
+                taskController.girisimcilikYuzde.value =
+                    (taskController.girisimcilikTamamlananModul.value /
+                            taskController.girisimcilikToplamModul.value) *
+                        100;
+                print(taskController.girisimcilikYuzde);
+              },
               modulSayisi: 9,
               modulAciklamasi:
                   'Girişimcilerin faaliyette bulundukları Finansal Sistem , Finansal Araçlar, Muhasebe ve Vergi Uygulamaları hakkında bilgi sahibi olun.',
@@ -63,6 +85,16 @@ class _GirisimcilikPageState extends State<GirisimcilikPage> {
               sure: '338',
             ),
             ModulCard(
+              onChanged: (String input) {
+                taskController.girisimcilikTamamlananModul.value +=
+                    int.parse(input);
+                print(taskController.girisimcilikTamamlananModul);
+                taskController.girisimcilikYuzde.value =
+                    (taskController.girisimcilikTamamlananModul.value /
+                            taskController.girisimcilikToplamModul.value) *
+                        100;
+                print(taskController.girisimcilikYuzde);
+              },
               modulSayisi: 1,
               modulAciklamasi:
                   'İş hayatınızı yeniden  kazanacak,  bir profesyonel hayat için sağlık gibi konularda önemli ipuçlarına erişebileceksiniz.',
@@ -71,6 +103,15 @@ class _GirisimcilikPageState extends State<GirisimcilikPage> {
               sure: '77',
             ),
             ModulCard(
+              onChanged: (String input) {
+                taskController.girisimcilikTamamlananModul += int.parse(input);
+                print(taskController.girisimcilikTamamlananModul);
+                taskController.girisimcilikYuzde.value =
+                    (taskController.girisimcilikTamamlananModul.value /
+                            taskController.girisimcilikToplamModul.value) *
+                        100;
+                print(taskController.girisimcilikYuzde);
+              },
               modulSayisi: 3,
               modulAciklamasi:
                   'Girişimcilik dünyasına girmeden önce bilmeniz gereken temel hukuki bilgileri öğrenin.',
