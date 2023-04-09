@@ -27,6 +27,12 @@ class _GirisimcilikPageState extends State<GirisimcilikPage> {
               backgroundColor: kGoogleGreen,
               elevation: 0,
               toolbarHeight: 50,
+              title: Text(
+                'Girişimcilik Modülleri',
+                style: TextStyle(
+                  fontFamily: 'VarelaRound',
+                ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),

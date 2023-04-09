@@ -27,6 +27,12 @@ class _UnityPageState extends State<UnityPage> {
               backgroundColor: kGoogleRed,
               elevation: 0,
               toolbarHeight: 50,
+              title: Text(
+                'Unity Modülleri',
+                style: TextStyle(
+                  fontFamily: 'VarelaRound',
+                ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),

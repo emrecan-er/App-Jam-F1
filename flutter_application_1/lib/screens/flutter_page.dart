@@ -26,6 +26,12 @@ class _FlutterPageState extends State<FlutterPage> {
         child: Column(
           children: [
             AppBar(
+              title: Text(
+                'Flutter Modülleri',
+                style: TextStyle(
+                  fontFamily: 'VarelaRound',
+                ),
+              ),
               backgroundColor: kGoogleBlue,
               elevation: 0,
               toolbarHeight: 50,
