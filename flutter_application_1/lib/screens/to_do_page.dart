@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/main_screen.dart';
+import 'package:flutter_application_1/widgets/task_list_item.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 import '../modals/task_model.dart';
@@ -71,10 +72,7 @@ class _ToDoPageState extends State<ToDoPage> {
           onDismissed: (direction) {
             _allTask.removeAt(index);
           },
-          child: ListTile(
-            title: Text(_listElementNow.name + " " + _listElementNow.id),
-            subtitle: Text(_listElementNow.createdAt.toString()),
-          ),
+          child: TaskItem(task: _listElementNow),
         );
       },
       itemCount: _allTask.length,
