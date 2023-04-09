@@ -1,11 +1,17 @@
+import 'package:flutter_application_1/modals/task_model.dart';
 import 'package:flutter_application_1/screens/landing_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
+
+  await Hive.initFlutter();
+  Hive.registerAdapter(TaskAdapter());
+
   runApp(const MyApp());
 }
 
