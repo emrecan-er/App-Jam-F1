@@ -13,4 +13,5 @@ class TaskController extends GetxController {
   RxDouble unityYuzde = 0.0.obs;
   RxDouble girisimcilikYuzde = 0.0.obs;
   RxDouble ingilizceYuzde = 0.0.obs;
+  var allTasks = [].obs;
 }

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter_application_1/controller/task_controller.dart';
 import 'package:flutter_application_1/screens/coursera_page.dart';
 import 'package:flutter_application_1/screens/to_do_page.dart';
+import 'package:flutter_application_1/widgets/task_list_item.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -30,6 +31,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  TaskController taskController = Get.put(TaskController());
   Future<void> sendMessageToSlackBot(
       String message, String botToken, String channel) async {
     final response = await http.post(
@@ -49,6 +51,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    inspect(taskController.allTasks.value);
     log(TaskController().flutterYuzde.toString());
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -330,55 +333,49 @@ class _MainScreenState extends State<MainScreen> {
                   children: [
                     TextManager(message: "Yapılacaklar Listem"),
                     RichText(
-                      text: TextSpan(children: [
-                        TextSpan(
-                            text: 'Tamamını Gör',
-                            style: TextStyle(
-                              color: kGoogleRed,
-                              fontFamily: 'VarelaRound',
-                              fontSize: 12,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Get.to(ToDoPage());
-                              }),
-                      ]),
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                              text: 'Tamamını Gör',
+                              style: TextStyle(
+                                color: kGoogleRed,
+                                fontFamily: 'VarelaRound',
+                                fontSize: 12,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Get.to(ToDoPage());
+                                }),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black,
-                      ),
-                      borderRadius: BorderRadius.circular(16),
-                      color: Colors.white),
-                  width: 250,
-                  height: 200,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'YAPILACAKLAR LİSTESİ',
-                          style: TextStyle(
-                              fontFamily: 'VarelaRound', color: Colors.black),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [],
-                      )
-                    ],
-                  ),
-                ),
+              SizedBox(
+                width: Get.width,
+                height: 100,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: taskController.allTasks.length,
+                    itemBuilder: (context, index) {
+                      return taskController.allTasks.isEmpty
+                          ? TextManager(
+                              message:
+                                  'Henüz Yapılacak Listesine Ekleme Yapmadınız.')
+                          : Row(
+                              children: [
+                                SizedBox(
+                                    width: Get.width,
+                                    child: TaskItem(
+                                      task: taskController.allTasks[1],
+                                    )),
+                              ],
+                            );
+                    }),
+              ),
+              SizedBox(
+                height: 50,
               ),
             ],
           ),
