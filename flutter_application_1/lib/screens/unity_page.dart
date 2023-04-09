@@ -47,20 +47,22 @@ class _UnityPageState extends State<UnityPage> {
               ),
             ),
             ModulCard(
-              modulSayisi: '17',
+              modulSayisi: 17,
               modulAciklamasi:
                   '2D ve 3D tasarım için en popüler uygulamaları kullanarak oyun sanatını öğrenin.',
               modulAdi: 'Unity ile Oyun Geliştirmeye Giriş',
               backgroundColor: kGoogleRed,
               sure: '1092',
+              
             ),
             ModulCard(
-              modulSayisi: '35',
+              modulSayisi: 35,
               modulAciklamasi:
                   'Unity kullanarak mobil ve PC platformları için oyun geliştirmede uzmanlaşın.',
               modulAdi: 'Unity ile Oyun Geliştirmede Uzmanlaşma',
               backgroundColor: kGoogleRed,
               sure: '1358',
+              
             ),
           ],
         ),

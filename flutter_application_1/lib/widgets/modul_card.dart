@@ -6,14 +6,16 @@ class ModulCard extends StatelessWidget {
   String modulAdi;
   String modulAciklamasi;
   Color backgroundColor;
-  String modulSayisi;
+  int modulSayisi;
   String sure;
+
   ModulCard(
       {required this.backgroundColor,
       required this.modulAciklamasi,
       required this.sure,
       required this.modulSayisi,
-      required this.modulAdi});
+      required this.modulAdi,
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -112,6 +114,8 @@ class ModulCard extends StatelessWidget {
                   height: 25,
                   child: TextField(
                     onChanged: (value) {
+
+                      
                       //value kullanıcının girdiği değer oluyor.o değerleri ayrı ayrı tutup
                       //yüzde hesabına vurulacak
 

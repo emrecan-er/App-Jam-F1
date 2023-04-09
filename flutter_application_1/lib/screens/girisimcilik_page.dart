@@ -47,7 +47,7 @@ class _GirisimcilikPageState extends State<GirisimcilikPage> {
               ),
             ),
             ModulCard(
-              modulSayisi: '9',
+              modulSayisi: 9,
               modulAciklamasi:
                   'Yeni nesil girişim dünyasında var olmak için çıkacağın bu yolculukta ihtiyacın olacak tüm unsurları öğreneceksin.',
               modulAdi: 'Temel Girişimcilik',
@@ -55,7 +55,7 @@ class _GirisimcilikPageState extends State<GirisimcilikPage> {
               sure: '338',
             ),
             ModulCard(
-              modulSayisi: '9',
+              modulSayisi: 9,
               modulAciklamasi:
                   'Girişimcilerin faaliyette bulundukları Finansal Sistem , Finansal Araçlar, Muhasebe ve Vergi Uygulamaları hakkında bilgi sahibi olun.',
               modulAdi: 'Girişimciler için Finans',
@@ -63,7 +63,7 @@ class _GirisimcilikPageState extends State<GirisimcilikPage> {
               sure: '338',
             ),
             ModulCard(
-              modulSayisi: '1',
+              modulSayisi: 1,
               modulAciklamasi:
                   'İş hayatınızı yeniden  kazanacak,  bir profesyonel hayat için sağlık gibi konularda önemli ipuçlarına erişebileceksiniz.',
               modulAdi: 'Girişimciler için İK',
@@ -71,7 +71,7 @@ class _GirisimcilikPageState extends State<GirisimcilikPage> {
               sure: '77',
             ),
             ModulCard(
-              modulSayisi: '3',
+              modulSayisi: 3,
               modulAciklamasi:
                   'Girişimcilik dünyasına girmeden önce bilmeniz gereken temel hukuki bilgileri öğrenin.',
               modulAdi: 'Girişimciler için Hukuk',
