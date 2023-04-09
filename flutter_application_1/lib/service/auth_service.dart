@@ -31,6 +31,20 @@ class AuthService {
     return await _auth.signOut();
   }
 
+  Future createCourseraPost(
+    String odevBaslik,
+    String odevLink,
+    String name,
+    DateTime tarih,
+  ) async {
+    await _firestore.collection("coursera").doc(_auth.currentUser?.uid).set({
+      'name': name,
+      'odevBaslik': odevBaslik,
+      'odevLink': odevLink,
+      'tarih': tarih,
+    });
+  }
+
   Future<User?> createPerson(
     String email,
     String password,

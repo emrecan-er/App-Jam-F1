@@ -1,7 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_application_1/controller/coursera_controller.dart';
 import 'package:flutter_application_1/screens/to_do_page.dart';
+import 'package:flutter_application_1/service/auth_service.dart';
+import 'package:flutter_application_1/widgets/coursera.dart';
+import 'package:flutter_application_1/widgets/wave_clipper.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:http/http.dart' as http;
@@ -19,6 +24,8 @@ class CourseraPage extends StatefulWidget {
 }
 
 class _CourseraPageState extends State<CourseraPage> {
+  CourseraController courseraController = Get.put(CourseraController());
+  AuthService _authService = AuthService();
   Future<void> sendMessageToSlackBot(
       String message, String botToken, String channel) async {
     final response = await http.post(
@@ -44,63 +51,71 @@ class _CourseraPageState extends State<CourseraPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           openDialog();
-          await sendMessageToSlackBot(
-            'Ödevimi değerlendirir misiniz ? \n İrem Pekkıyak \n https://www.coursera.org/learn/bitirme-projesi ',
-            'API_KEY',
-            '#random',
-          );
         },
         child: Icon(
           Icons.add,
           size: 30,
         ),
-        backgroundColor: kGoogleBlue,
+        backgroundColor: kGoogleGreen,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             AppBar(
-              backgroundColor: kGoogleBlue,
+              title: Text(
+                'Coursera Yardımlaşma Platformu',
+                style: TextStyle(fontFamily: 'VarelaRound', fontSize: 16),
+              ),
+              backgroundColor: kGoogleGreen,
               elevation: 0,
               toolbarHeight: 50,
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
+            MyWaveClipper(
+              widget: Column(
                 children: [
-                  TextManager(
-                    message: 'Coursera Ödev Linkleri',
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Bu kısıma değerlendirilmesini istediğin ödevinin linkini koyabilirsin!\nKoyduğun linkler Slack Botumuz tarafından kanallarda otomatik paylaşılacak.',
+                      style: TextStyle(
+                          fontFamily: 'VarelaRound',
+                          color: Colors.white,
+                          fontSize: 13),
+                    ),
                   )
                 ],
               ),
             ),
-            CourseraCard(
-              namesurname: 'Irem Pekkıyak',
-              link: 'https://www.coursera.org/learn/bitirme-projesi',
-              modulAdi:
-                  'Peer-graded Assignment: Etkinlik: Değerlendirme bulgularını sunun',
-              backgroundColor: kGoogleBlue,
-            ),
-            CourseraCard(
-              namesurname: 'Irem Pekkıyak',
-              link: 'https://www.coursera.org/learn/bitirme-projesi',
-              modulAdi:
-                  'Peer-graded Assignment: Etkinlik: Değerlendirme bulgularını sunun',
-              backgroundColor: kGoogleBlue,
-            ),
-            CourseraCard(
-              namesurname: 'Irem Pekkıyak',
-              link: 'https://www.coursera.org/learn/bitirme-projesi',
-              modulAdi:
-                  'Peer-graded Assignment: Etkinlik: Değerlendirme bulgularını sunun',
-              backgroundColor: kGoogleBlue,
-            ),
-            CourseraCard(
-              namesurname: 'Irem Pekkıyak',
-              link: 'https://www.coursera.org/learn/bitirme-projesi',
-              modulAdi:
-                  'Peer-graded Assignment: Etkinlik: Değerlendirme bulgularını sunun',
-              backgroundColor: kGoogleBlue,
+            TextManager(message: 'Güncel İlanlar'),
+            SizedBox(
+              width: Get.width,
+              height: Get.height,
+              child: StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('coursera')
+                    .snapshots(),
+                builder:
+                    (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                  if (streamSnapshot.hasData) {
+                    return ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: streamSnapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          final DocumentSnapshot documentSnapshot =
+                              streamSnapshot.data!.docs[index];
+
+                          return CourseraCard(
+                            namesurname: documentSnapshot['name'],
+                            link: documentSnapshot['odevLink'],
+                            modulAdi: documentSnapshot['odevBaslik'],
+                            backgroundColor: kGoogleBlue,
+                          );
+                        });
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                },
+              ),
             ),
           ],
         ),
@@ -112,13 +127,19 @@ class _CourseraPageState extends State<CourseraPage> {
         context: context,
         builder: (context) => AlertDialog(
           title: TextField(
+            onChanged: (String input) {
+              courseraController.ogrenciAdi.value = input;
+            },
             decoration: InputDecoration(hintText: 'İsim Soyisim'),
           ),
           content: SingleChildScrollView(
             child: ListBody(
-              children: const <Widget>[
+              children: <Widget>[
                 //Text('Modül İsmini, kaçıncı haftada olduğunu belirtiniz.'),
                 TextField(
+                  onChanged: (String input) {
+                    courseraController.odevBaslik.value = input;
+                  },
                   decoration: InputDecoration(hintText: 'Dersin Adı'),
                 ),
                 SizedBox(
@@ -127,6 +148,9 @@ class _CourseraPageState extends State<CourseraPage> {
                 // Text('Coursera Linkini Girin.'),
                 TextField(
                   decoration: InputDecoration(hintText: 'Ödev Linkini'),
+                  onChanged: (String input) {
+                    courseraController.odevLink.value = input;
+                  },
                 ),
               ],
             ),
@@ -137,7 +161,27 @@ class _CourseraPageState extends State<CourseraPage> {
             TextButton(
                 onPressed: () => Navigator.pop(context), child: Text('Cancel')),
             TextButton(
-                onPressed: () => Navigator.pop(context), child: Text('Save'))
+              onPressed: () async {
+                Navigator.pop(context);
+                courseraController.courseraIlanlari.add(CourseraCard(
+                  backgroundColor: kGoogleBlue,
+                  link: courseraController.odevLink.value,
+                  namesurname: courseraController.ogrenciAdi.value,
+                  modulAdi: courseraController.odevBaslik.value,
+                ));
+                _authService.createCourseraPost(
+                    courseraController.odevBaslik.value,
+                    courseraController.odevLink.value,
+                    courseraController.ogrenciAdi.value,
+                    DateTime.now());
+                await sendMessageToSlackBot(
+                  '${courseraController.odevBaslik}\n\n${courseraController.odevLink}\n\n${courseraController.ogrenciAdi}\n\nTeşekkürler\nÖdevinizin daha çok insana ulaşması için çabalıyoruz.Katılmak isterseniz AppJam F1 uygulamasını indirin🎉🎉🎉',
+                  'xoxb-4440296257457-5083295750036-BMUMupgOE1QJUwqzhfA2Mda7',
+                  '#random',
+                );
+              },
+              child: Text('Save'),
+            )
           ],
           elevation: 10.0, shadowColor: Colors.black,
           shape: RoundedRectangleBorder(
