@@ -178,8 +178,8 @@ class _DashboardState extends State<Dashboard> {
               onPressed: () {
                 sendMessageToSlackBot(
                   '$duyuruText \n\n #$baslik',
-                  'API KEY',
-                  '#general',
+                  'API_KEY',
+                  '#bulusma_duyuru',
                 );
                 AwesomeDialog(
                   context: context,

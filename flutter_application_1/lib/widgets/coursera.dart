@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/constans.dart';
 
+import 'coursera_card.dart';
+
 class Coursera extends StatefulWidget {
   const Coursera({super.key});
 
@@ -20,26 +22,37 @@ class _CourseraState extends State<Coursera> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                child: CourseraManager(
-                    message: "Ödevimi değerlendirir misiniz?",
-                    name: "Emrecan Er"),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                child: CourseraManager(
-                  message: "Linke tıklayıp ödevime bakar mısınız?",
-                  name: "Salih Büker",
+                child: CourseraCard(
+                  namesurname: 'Irem Pekkıyak',
+                  link: 'https://www.coursera.org/learn/bitirme-projesi',
+                  modulAdi:
+                      'Peer-graded Assignment: Etkinlik: Değerlendirme bulgularını sunun',
+                  backgroundColor: kGoogleBlue,
                 ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                child: CourseraManager(
-                    message: "Son bir kişi ödevime bakabilir mi?",
-                    name: "Ömer Yılmaz"),
+                child: CourseraCard(
+                  namesurname: 'Irem Pekkıyak',
+                  link: 'https://www.coursera.org/learn/bitirme-projesi',
+                  modulAdi:
+                      'Peer-graded Assignment: Etkinlik: Değerlendirme bulgularını sunun',
+                  backgroundColor: kGoogleBlue,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                child: CourseraCard(
+                  namesurname: 'Irem Pekkıyak',
+                  link: 'https://www.coursera.org/learn/bitirme-projesi',
+                  modulAdi:
+                      'Peer-graded Assignment: Etkinlik: Değerlendirme bulgularını sunun',
+                  backgroundColor: kGoogleBlue,
+                ),
               ),
             ),
           ],

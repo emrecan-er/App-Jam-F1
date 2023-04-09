@@ -17,7 +17,6 @@ class _TaskItemState extends State<TaskItem> {
   late LocalStorage _localStorage;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _localStorage = locator<LocalStorage>();
     _taskNameController.text = widget.task.name;
