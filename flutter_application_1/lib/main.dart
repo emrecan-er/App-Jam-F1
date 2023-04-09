@@ -8,17 +8,26 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 final locator = GetIt.instance;
 
-void setup(){
+void setup() {
   locator.registerSingleton<LocalStorage>(HiveLocalStorage());
 }
 
-Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp();
-
+Future<void> setupHive() async {
   await Hive.initFlutter();
   Hive.registerAdapter(TaskAdapter());
+  var taskBox = await Hive.openBox<Task>('tasks');
+  for (var task in taskBox.values) {
+    if (task.createdAt.day != DateTime.now().day) {
+      taskBox.delete(task.id);
+    }
+  }
+}
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  await setupHive();
   setup();
 
   runApp(const MyApp());
