@@ -1,5 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/task_controller.dart';
+import 'package:flutter_application_1/widgets/tasks.dart';
+import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class CircularPercents extends StatefulWidget {
@@ -12,41 +17,50 @@ class CircularPercents extends StatefulWidget {
 }
 
 class _CircularPercentsState extends State<CircularPercents> {
+  TaskController taskController = Get.put(TaskController());
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
-          child: Column(
-            children: [
-              Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CircularPercentManager(
-                      name: "Flutter", yuzde: 70.6, renk: Color(0xff4285f4))),
-              Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CircularPercentManager(
-                      name: "Unity", yuzde: 65.0, renk: Color(0xff34a853))),
-            ],
+          child: Obx(
+            () => Column(
+              children: [
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CircularPercentManager(
+                        name: "Flutter",
+                        yuzde: taskController.flutterYuzde.value.toInt(),
+                        renk: Color(0xff4285f4))),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CircularPercentManager(
+                        name: "Unity",
+                        yuzde: taskController.unityYuzde.value.toInt(),
+                        renk: Color(0xff34a853))),
+              ],
+            ),
           ),
         ),
         Expanded(
-          child: Column(
-            children: [
-              Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CircularPercentManager(
-                      name: "Girişimcilik",
-                      yuzde: 100,
-                      renk: Color(0xffe94235))),
-              Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CircularPercentManager(
-                    name: "İngilizce",
-                    yuzde: 25,
-                    renk: Color(0xfffabb05),
-                  )),
-            ],
+          child: Obx(
+            () => Column(
+              children: [
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CircularPercentManager(
+                        name: "Girişimcilik",
+                        yuzde: taskController.girisimcilikYuzde.value.toInt(),
+                        renk: Color(0xffe94235))),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CircularPercentManager(
+                      name: "İngilizce",
+                      yuzde: taskController.ingilizceYuzde.value.toInt(),
+                      renk: Color(0xfffabb05),
+                    )),
+              ],
+            ),
           ),
         ),
       ],
@@ -55,7 +69,7 @@ class _CircularPercentsState extends State<CircularPercents> {
 }
 
 class CircularPercentManager extends StatelessWidget {
-  double yuzde;
+  int yuzde;
   String name;
   Color renk;
 

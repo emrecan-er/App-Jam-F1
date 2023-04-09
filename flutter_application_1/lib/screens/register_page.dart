@@ -23,7 +23,7 @@ class RegisterPage extends StatelessWidget {
               height: 60,
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -39,7 +39,7 @@ class RegisterPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(16.0),
               child: Text(
                 'Kişisel Bilgilerin',
                 style: TextStyle(

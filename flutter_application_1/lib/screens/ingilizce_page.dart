@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/task_controller.dart';
 import 'package:flutter_application_1/screens/main_screen.dart';
 import 'package:flutter_application_1/widgets/modul_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -15,6 +16,7 @@ class IngilizcePage extends StatefulWidget {
 
 class _IngilizcePageState extends State<IngilizcePage> {
   Color color = Colors.grey;
+  TaskController taskController = Get.put(TaskController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +49,15 @@ class _IngilizcePageState extends State<IngilizcePage> {
               ),
             ),
             ModulCard(
+              onChanged: (String input) {
+                taskController.ingilizceTamamlananModul += int.parse(input);
+                print(taskController.ingilizceTamamlananModul);
+                taskController.ingilizceYuzde.value =
+                    (taskController.ingilizceTamamlananModul.value /
+                            taskController.ingilizceToplamModul.value) *
+                        100;
+                print(taskController.ingilizceYuzde);
+              },
               modulSayisi: 8,
               modulAciklamasi:
                   'Kariyerini teknoloji sektöründe kurarken faydalanabileceğin, oyun ve uygulama geliştirme alanında uluslararası standart ve trendleri takip edebilmeni kolaylaştıracak İngilizce eğitimlerine katıl.',

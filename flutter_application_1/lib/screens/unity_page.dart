@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/task_controller.dart';
 import 'package:flutter_application_1/screens/main_screen.dart';
 import 'package:flutter_application_1/widgets/modul_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,6 +15,7 @@ class UnityPage extends StatefulWidget {
 }
 
 class _UnityPageState extends State<UnityPage> {
+  TaskController taskController = Get.put(TaskController());
   Color color = Colors.grey;
   @override
   Widget build(BuildContext context) {
@@ -47,22 +49,38 @@ class _UnityPageState extends State<UnityPage> {
               ),
             ),
             ModulCard(
+              onChanged: (String input) {
+                taskController.unityTamamlananModul += int.parse(input);
+                print(taskController.unityTamamlananModul);
+                taskController.unityYuzde.value =
+                    (taskController.unityTamamlananModul /
+                            taskController.unityToplamModul.value) *
+                        100;
+                print(taskController.unityYuzde);
+              },
               modulSayisi: 17,
               modulAciklamasi:
                   '2D ve 3D tasarım için en popüler uygulamaları kullanarak oyun sanatını öğrenin.',
               modulAdi: 'Unity ile Oyun Geliştirmeye Giriş',
               backgroundColor: kGoogleRed,
               sure: '1092',
-              
             ),
             ModulCard(
+              onChanged: (String input) {
+                taskController.unityTamamlananModul += int.parse(input);
+                print(taskController.unityTamamlananModul);
+                taskController.unityYuzde.value =
+                    (taskController.unityTamamlananModul /
+                            taskController.unityToplamModul.value) *
+                        100;
+                print(taskController.unityYuzde);
+              },
               modulSayisi: 35,
               modulAciklamasi:
                   'Unity kullanarak mobil ve PC platformları için oyun geliştirmede uzmanlaşın.',
               modulAdi: 'Unity ile Oyun Geliştirmede Uzmanlaşma',
               backgroundColor: kGoogleRed,
               sure: '1358',
-              
             ),
           ],
         ),

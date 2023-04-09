@@ -24,6 +24,7 @@ class LoginPage extends StatelessWidget {
     return Material(
       child: Scaffold(
         body: SingleChildScrollView(
+          physics: NeverScrollableScrollPhysics(),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -163,7 +164,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 110,
+                height: Get.height / 8.5,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

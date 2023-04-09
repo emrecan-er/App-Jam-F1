@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter_application_1/controller/task_controller.dart';
 import 'package:flutter_application_1/screens/coursera_page.dart';
 import 'package:flutter_application_1/screens/to_do_page.dart';
 import 'package:http/http.dart' as http;
@@ -48,6 +49,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    log(TaskController().flutterYuzde.toString());
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {

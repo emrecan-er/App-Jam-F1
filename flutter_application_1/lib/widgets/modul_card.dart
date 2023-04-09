@@ -7,9 +7,11 @@ class ModulCard extends StatelessWidget {
   String modulAciklamasi;
   Color backgroundColor;
   int modulSayisi;
+  Function(String input) onChanged;
   String sure;
 
   ModulCard({
+    required this.onChanged,
     required this.backgroundColor,
     required this.modulAciklamasi,
     required this.sure,
@@ -114,14 +116,7 @@ class ModulCard extends StatelessWidget {
                   width: 30,
                   height: 25,
                   child: TextField(
-                    onChanged: (value) {
-                      //value kullanıcının girdiği değer oluyor.o değerleri ayrı ayrı tutup
-                      //yüzde hesabına vurulacak
-
-                      //burada ModulCardd çağırıldığında onChanged Fonksiyonunu iste
-
-                      // Yukarıda Function() onChanged; yazım constructorda required this.onChanged yapılacak
-                    },
+                    onChanged: onChanged,
                     keyboardType: TextInputType.number,
                     style: TextStyle(
                       fontFamily: 'VarelaRound',

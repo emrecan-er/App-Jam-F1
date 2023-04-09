@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/task_controller.dart';
 import 'package:flutter_application_1/screens/main_screen.dart';
 import 'package:flutter_application_1/widgets/modul_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,6 +17,7 @@ class FlutterPage extends StatefulWidget {
 }
 
 class _FlutterPageState extends State<FlutterPage> {
+  TaskController taskController = Get.put(TaskController());
   Color color = Colors.grey;
   @override
   Widget build(BuildContext context) {
@@ -37,6 +41,15 @@ class _FlutterPageState extends State<FlutterPage> {
               ),
             ),
             ModulCard(
+              onChanged: (String input) {
+                taskController.flutterTamamlananModul += int.parse(input);
+                print(taskController.flutterTamamlananModul);
+                taskController.flutterYuzde.value =
+                    (taskController.flutterTamamlananModul /
+                            taskController.flutterToplamModul.value) *
+                        100;
+                print(taskController.flutterYuzde);
+              },
               modulSayisi: 1,
               modulAciklamasi:
                   'Flutter ile mobil, web ve masaüstü uygulamaları geliştirmeye başlayın',
@@ -45,6 +58,15 @@ class _FlutterPageState extends State<FlutterPage> {
               sure: '187',
             ),
             ModulCard(
+              onChanged: (String input) {
+                taskController.flutterTamamlananModul += int.parse(input);
+                print(taskController.flutterTamamlananModul);
+                taskController.flutterYuzde.value =
+                    (taskController.flutterTamamlananModul /
+                            taskController.flutterToplamModul.value) *
+                        100;
+                print(taskController.flutterYuzde);
+              },
               modulSayisi: 21,
               modulAciklamasi:
                   'Flutter ile Android ve iOS uygulamaları geliştirmeyi öğrenin.',
@@ -53,6 +75,15 @@ class _FlutterPageState extends State<FlutterPage> {
               sure: '1358',
             ),
             ModulCard(
+              onChanged: (String input) {
+                taskController.flutterTamamlananModul += int.parse(input);
+                print(taskController.flutterTamamlananModul);
+                taskController.flutterYuzde.value =
+                    (taskController.flutterTamamlananModul /
+                            taskController.flutterToplamModul.value) *
+                        100;
+                print(taskController.flutterYuzde.value);
+              },
               modulSayisi: 3,
               modulAciklamasi:
                   'Flutter ile örnek projeler geliştirerek öğrendiklerinizi pekiştirin.',

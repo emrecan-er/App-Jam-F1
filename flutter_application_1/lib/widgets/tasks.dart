@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/constans.dart';
+import 'package:flutter_application_1/controller/task_controller.dart';
 import 'package:flutter_application_1/screens/flutter_page.dart';
 import 'package:flutter_application_1/screens/girisimcilik_page.dart';
 import 'package:flutter_application_1/screens/ingilizce_page.dart';
@@ -8,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 class Tasks extends StatelessWidget {
-  const Tasks({super.key});
+  TaskController taskController = TaskController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class Tasks extends StatelessWidget {
                   },
                   color: kGoogleBlue,
                   ders: 'Flutter',
-                  modulSayisi: '25',
+                  modulSayisi: taskController.flutterToplamModul.toString(),
                 ),
                 TaskManager(
                   onTap: () {
@@ -35,7 +36,8 @@ class Tasks extends StatelessWidget {
                   },
                   color: kGoogleGreen,
                   ders: 'Girişimcilik',
-                  modulSayisi: '72',
+                  modulSayisi:
+                      taskController.girisimcilikToplamModul.toString(),
                 ),
               ],
             ),
@@ -51,7 +53,7 @@ class Tasks extends StatelessWidget {
                   },
                   color: kGoogleRed,
                   ders: 'Unity',
-                  modulSayisi: '45',
+                  modulSayisi: taskController.unityToplamModul.toString(),
                 ),
                 TaskManager(
                   onTap: () {
@@ -59,7 +61,7 @@ class Tasks extends StatelessWidget {
                   },
                   color: kGoogleYellow,
                   ders: 'İngilizce',
-                  modulSayisi: '32',
+                  modulSayisi: taskController.ingilizceToplamModul.toString(),
                 ),
               ],
             ),
