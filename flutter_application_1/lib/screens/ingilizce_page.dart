@@ -47,7 +47,7 @@ class _IngilizcePageState extends State<IngilizcePage> {
               ),
             ),
             ModulCard(
-              modulSayisi: '8',
+              modulSayisi: 8,
               modulAciklamasi:
                   'Kariyerini teknoloji sektöründe kurarken faydalanabileceğin, oyun ve uygulama geliştirme alanında uluslararası standart ve trendleri takip edebilmeni kolaylaştıracak İngilizce eğitimlerine katıl.',
               modulAdi: 'Yazılımcılar İçin İngilizce Eğitimi',

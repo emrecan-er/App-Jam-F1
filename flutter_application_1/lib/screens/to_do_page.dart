@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/data/local_storage.dart';
+import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/screens/main_screen.dart';
+import 'package:flutter_application_1/widgets/task_list_item.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 import '../modals/task_model.dart';
@@ -14,11 +17,14 @@ class ToDoPage extends StatefulWidget {
 
 class _ToDoPageState extends State<ToDoPage> {
   late List<Task> _allTask;
+  late LocalStorage _localStorage;
 
   @override
   void initState() {
     super.initState();
+    _localStorage=locator<LocalStorage>();
     _allTask = <Task>[];
+    _getAllTaskFromDb();
   }
 
 
@@ -54,16 +60,31 @@ class _ToDoPageState extends State<ToDoPage> {
         )
       ],
      ),
-     body: ListView.builder(
+     body: _allTask.isNotEmpty ? ListView.builder(
       itemBuilder: (context, index) {
         var _listElementNow = _allTask[index];
-        return ListTile(
-          title: Text(_listElementNow.name + " " + _listElementNow.id),
-          subtitle: Text(_listElementNow.createdAt.toString()),
+        return Dismissible(
+          background: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.delete, color: Colors.grey),
+              SizedBox(width: 8),
+              TextManager(message: "Bu görev silindi")
+            ],
+          ),
+          key: Key(_listElementNow.id),
+          onDismissed: (direction){
+            _allTask.removeAt(index);
+            _localStorage.deleteTask(task: _listElementNow);
+            setState(() {
+              
+            });
+          },
+          child: TaskItem(task: _listElementNow),
         );
       },
       itemCount: _allTask.length,
-    ),
+    ) : Center(child: TextManager(message: "Görev ekle!!!"),)
     );
   }
 
@@ -84,10 +105,11 @@ class _ToDoPageState extends State<ToDoPage> {
               onSubmitted: (value){
                 Navigator.of(context).pop();
                 if(value.length>3){
-                  DatePicker.showTimePicker(context, showSecondsColumn: false, onConfirm: (time){
+                  DatePicker.showTimePicker(context, showSecondsColumn: false, onConfirm: (time) async {
                     var newAddTask = Task.create(name: value, createdAt: time);
 
                     _allTask.add(newAddTask);
+                    await _localStorage.addTask(task: newAddTask);
                     setState(() {
                       
                     });
@@ -99,5 +121,12 @@ class _ToDoPageState extends State<ToDoPage> {
         );
       },
     );
+  }
+  
+  void _getAllTaskFromDb() async{
+    _allTask = await _localStorage.getAllTask();
+    setState(() {
+      
+    });
   }
 }

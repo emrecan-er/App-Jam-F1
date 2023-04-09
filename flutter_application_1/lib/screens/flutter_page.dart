@@ -37,7 +37,7 @@ class _FlutterPageState extends State<FlutterPage> {
               ),
             ),
             ModulCard(
-              modulSayisi: '1',
+              modulSayisi: 1,
               modulAciklamasi:
                   'Flutter ile mobil, web ve masaüstü uygulamaları geliştirmeye başlayın',
               modulAdi: 'Flutter Hazırlık',
@@ -45,7 +45,7 @@ class _FlutterPageState extends State<FlutterPage> {
               sure: '187',
             ),
             ModulCard(
-              modulSayisi: '21',
+              modulSayisi: 21,
               modulAciklamasi:
                   'Flutter ile Android ve iOS uygulamaları geliştirmeyi öğrenin.',
               modulAdi: 'Flutter ile Uygulama Geliştirme Eğitimleri',
@@ -53,7 +53,7 @@ class _FlutterPageState extends State<FlutterPage> {
               sure: '1358',
             ),
             ModulCard(
-              modulSayisi: '3',
+              modulSayisi: 3,
               modulAciklamasi:
                   'Flutter ile örnek projeler geliştirerek öğrendiklerinizi pekiştirin.',
               modulAdi:
