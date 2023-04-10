@@ -19,19 +19,17 @@ class _LandingState extends State<LandingPage> {
   // ignore: prefer_final_fields
   List<Widget> _pages = [
     SliderPage(
-      description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacus leo, porta sit amet libero quis, scelerisque blandit libero. Etiam in leo erat. Mauris rhoncus commodo elementum. Vivamus tristique urna ante',
+      description: 'Oyun ve Uygulama Akademisine hoşgeldin!',
       image: "assets/1.png",
       title: 'Akademiye Hoşgeldin!',
     ),
     SliderPage(
-      description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacus leo, porta sit amet libero quis, scelerisque blandit libero. Etiam in leo erat. Mauris rhoncus commodo elementum. Vivamus tristique urna ante, a feugiat ante condimentum id',
+      description: 'İlerlemeni Takip Et',
       image: "assets/2.png",
       title: 'Ödevlerini Kontrol Et',
     ),
     SliderPage(
-      description: 'Lorem ipsum dolor sit amet, ',
+      description: 'Ödevlerini Hızlıca Duyur!',
       image: "assets/koy.png",
       title: 'Slack Botumuzdan Faydalan',
     ),
