@@ -23,7 +23,7 @@ class CourseraCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        width: Get.width,
+        width: 400,
         height: 160,
         decoration: BoxDecoration(
           border: Border.all(
@@ -73,6 +73,8 @@ class CourseraCard extends StatelessWidget {
                       fontFamily: 'VarelaRound',
                       color: Colors.black,
                     ),
+                    softWrap: false,
+                    overflow: TextOverflow.fade,
                   )
                 ],
               ),
@@ -90,6 +92,7 @@ class CourseraCard extends StatelessWidget {
                         fontFamily: 'VarelaRound',
                         color: Colors.blue,
                       ),
+                      maxLines: 1,
                     ),
                     onPressed: () {
                       Navigator.push(

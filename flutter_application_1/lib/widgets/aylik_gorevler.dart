@@ -22,19 +22,7 @@ class AylikGorevler extends StatelessWidget {
             children: [
               TextManager(message: "Aylık Görevler"),
               RichText(
-                text: TextSpan(children: [
-                  TextSpan(
-                      text: 'Tamamını Gör',
-                      style: TextStyle(
-                        color: kGoogleRed,
-                        fontFamily: 'VarelaRound',
-                        fontSize: 12,
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          print('Login Text Clicked');
-                        }),
-                ]),
+                text: TextSpan(children: []),
               ),
             ],
           ),

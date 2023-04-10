@@ -1,20 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/controller/coursera_controller.dart';
-import 'package:flutter_application_1/screens/to_do_page.dart';
 import 'package:flutter_application_1/service/auth_service.dart';
-import 'package:flutter_application_1/widgets/coursera.dart';
 import 'package:flutter_application_1/widgets/wave_clipper.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:http/http.dart' as http;
-
 import '../constants/constans.dart';
 import '../widgets/coursera_card.dart';
 import '../widgets/text_manager.dart';
-import 'main_screen.dart';
 
 class CourseraPage extends StatefulWidget {
   const CourseraPage({super.key});
@@ -175,9 +168,9 @@ class _CourseraPageState extends State<CourseraPage> {
                     courseraController.ogrenciAdi.value,
                     DateTime.now());
                 await sendMessageToSlackBot(
-                  '${courseraController.odevBaslik}\n\n${courseraController.odevLink}\n\n${courseraController.ogrenciAdi}\n\nTeşekkürler\nÖdevinizin daha çok insana ulaşması için çabalıyoruz.Katılmak isterseniz AppJam F1 uygulamasını indirin🎉🎉🎉',
-                  'xoxb-4440296257457-5083295750036-BMUMupgOE1QJUwqzhfA2Mda7',
-                  '#random',
+                  '${courseraController.odevBaslik}\n\n${courseraController.odevLink}\n\n${courseraController.ogrenciAdi}\n\nTeşekkürler\n\nÖdevinizin daha çok insana ulaşması için çabalıyoruz.Katılmak isterseniz AppJam F1 uygulamasını indirin🎉🎉🎉',
+                  'APIKEY',
+                  '#general',
                 );
               },
               child: Text('Save'),

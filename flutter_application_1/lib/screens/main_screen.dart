@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter_application_1/controller/task_controller.dart';
 import 'package:flutter_application_1/screens/coursera_page.dart';
 import 'package:flutter_application_1/screens/to_do_page.dart';
@@ -13,7 +12,6 @@ import 'package:flutter_application_1/service/auth_service.dart';
 import 'package:flutter_application_1/widgets/circular_percents.dart';
 import 'package:flutter_application_1/widgets/coursera.dart';
 import 'package:flutter_application_1/widgets/tasks.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../widgets/aylik_gorevler.dart';
 import '../widgets/my_header.dart';
@@ -30,6 +28,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   TaskController taskController = Get.put(TaskController());
+  AuthService authService = AuthService();
   Future<void> sendMessageToSlackBot(
       String message, String botToken, String channel) async {
     final response = await http.post(
@@ -54,10 +53,6 @@ class _MainScreenState extends State<MainScreen> {
         onPressed: () {
           Get.to(ToDoPage());
         },
-        /*() async {
-          await sendMessageToSlackBot('asd', 'SLACK_TOKEN', '#general');
-          
-        },*/
         child: Icon(
           Icons.notes,
         ),
@@ -285,7 +280,7 @@ class _MainScreenState extends State<MainScreen> {
                     }),
               ),
               SizedBox(
-                height: 20,
+                height: 100,
               ),
             ],
           ),

@@ -45,6 +45,20 @@ class AuthService {
     });
   }
 
+  Future userPercents(
+    String flutterYuzde,
+    String unityYuzde,
+    String girisimcilikYuzde,
+    String ingilizceYuzde,
+  ) async {
+    await _firestore.collection("yuzdeler").doc(_auth.currentUser?.uid).set({
+      'flutterYuzde': flutterYuzde,
+      'unityYuzde': unityYuzde,
+      'girisimcilikYuzde': girisimcilikYuzde,
+      'ingilizceYuzde': ingilizceYuzde,
+    });
+  }
+
   Future<User?> createPerson(
     String email,
     String password,
