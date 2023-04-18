@@ -4,6 +4,8 @@ import 'package:flutter_application_1/screens/landing_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:flutter/services.dart';
+
 import 'package:hive_flutter/hive_flutter.dart';
 
 final locator = GetIt.instance;
@@ -25,12 +27,14 @@ Future<void> setupHive() async {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp();
 
   await setupHive();
   setup();
 
   runApp(const MyApp());
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 }
 
 class MyApp extends StatelessWidget {
